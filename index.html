@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bingo Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎱</text></svg>">
+</head>
+<body>
+  <header>
+    <h1>🎱 Bingo Tracker</h1>
+    <p class="subtitle">90-ball · 3×9 tickets · marks all tickets as numbers are called</p>
+  </header>
+
+  <main>
+    <section class="caller card">
+      <form id="call-form" autocomplete="off">
+        <label for="call-input">Called number</label>
+        <input id="call-input" type="number" min="1" max="90" inputmode="numeric" placeholder="1–90" autofocus>
+        <button type="submit" class="primary">Mark</button>
+        <button type="button" id="undo-btn" title="Undo last call">↩ Undo</button>
+        <button type="button" id="reset-btn" class="danger" title="Clear all called numbers">New game</button>
+      </form>
+      <div id="last-call" class="last-call" hidden></div>
+      <div id="history" class="history"></div>
+    </section>
+
+    <section class="card">
+      <details id="board-details">
+        <summary>Number board (tap to call / un-call)</summary>
+        <div id="board" class="board"></div>
+      </details>
+    </section>
+
+    <section id="tickets" class="tickets"></section>
+
+    <p class="hint">Tickets and called numbers are saved in this browser automatically.</p>
+  </main>
+
+  <dialog id="editor">
+    <form method="dialog" id="editor-form">
+      <h2 id="editor-title">Edit ticket</h2>
+      <p class="editor-help">Enter each row's 5 numbers separated by spaces, left to right as printed on the ticket. Columns are placed automatically (1–9, 10–19, … 80–90).</p>
+      <label>Ticket name <input id="editor-name" type="text" maxlength="20"></label>
+      <label>Row 1 <input id="editor-row-0" type="text" inputmode="numeric" placeholder="e.g. 2 35 43 76 85"></label>
+      <label>Row 2 <input id="editor-row-1" type="text" inputmode="numeric" placeholder="e.g. 7 11 20 44 69"></label>
+      <label>Row 3 <input id="editor-row-2" type="text" inputmode="numeric" placeholder="e.g. 15 25 36 57 77"></label>
+      <p id="editor-error" class="editor-error" role="alert"></p>
+      <div class="editor-actions">
+        <button type="button" id="editor-cancel">Cancel</button>
+        <button type="submit" class="primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

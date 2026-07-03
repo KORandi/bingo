@@ -1,0 +1,303 @@
+:root {
+  --bg: #f4f2f5;
+  --card: #ffffff;
+  --ink: #221c26;
+  --muted: #6f6678;
+  --line: #ddd6e2;
+  --accent: #c2186f;
+  --accent-ink: #ffffff;
+  --marked: #c2186f;
+  --marked-ink: #ffffff;
+  --blank: #efe9f2;
+  --win: #1d8a4b;
+  --danger: #b3261e;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17131b;
+    --card: #221c28;
+    --ink: #f0eaf4;
+    --muted: #a79bb2;
+    --line: #3a3242;
+    --accent: #ec4d9b;
+    --accent-ink: #1c0511;
+    --marked: #ec4d9b;
+    --marked-ink: #1c0511;
+    --blank: #2c2434;
+    --win: #4cc47f;
+    --danger: #ff7a70;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+header {
+  padding: 1.2rem 1rem 0.4rem;
+  text-align: center;
+}
+
+h1 { margin: 0; font-size: 1.5rem; }
+
+.subtitle { margin: 0.2rem 0 0; color: var(--muted); font-size: 0.85rem; }
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.8rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.9rem;
+}
+
+/* --- caller --- */
+
+#call-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+#call-form label { font-weight: 600; }
+
+#call-input {
+  width: 6rem;
+  font-size: 1.4rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  text-align: center;
+}
+
+button {
+  font: inherit;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+button:hover { border-color: var(--accent); }
+
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+}
+
+button.danger { color: var(--danger); }
+
+.last-call {
+  margin-top: 0.6rem;
+  font-size: 1.1rem;
+}
+
+.last-call strong { font-size: 1.6rem; color: var(--accent); }
+
+.history {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.history .chip {
+  background: var(--blank);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.history .chip:last-child {
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+}
+
+/* --- number board --- */
+
+summary { cursor: pointer; font-weight: 600; }
+
+.board {
+  margin-top: 0.7rem;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+}
+
+.board button {
+  padding: 0;
+  aspect-ratio: 1.25;
+  min-height: 2.2rem;
+  font-variant-numeric: tabular-nums;
+  border-radius: 6px;
+}
+
+.board button.called {
+  background: var(--marked);
+  border-color: var(--marked);
+  color: var(--marked-ink);
+  font-weight: 700;
+}
+
+/* --- tickets --- */
+
+.tickets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 0.9rem;
+}
+
+.ticket {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ticket-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ticket-head h2 { margin: 0; font-size: 1rem; flex: 1; }
+
+.ticket-head .status {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--blank);
+  color: var(--muted);
+}
+
+.ticket-head .status.win {
+  background: var(--win);
+  color: #fff;
+}
+
+.ticket-head .edit-btn { padding: 0.25rem 0.6rem; font-size: 0.85rem; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 3px;
+}
+
+.cell {
+  aspect-ratio: 1.05;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  font-weight: 600;
+  font-size: clamp(0.85rem, 2.6vw, 1.05rem);
+  font-variant-numeric: tabular-nums;
+  background: var(--card);
+}
+
+.cell.blank { background: var(--blank); border-color: transparent; }
+
+.cell.marked {
+  background: var(--marked);
+  border-color: var(--marked);
+  color: var(--marked-ink);
+}
+
+.cell.just-marked { animation: pop 0.35s ease; }
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+.ticket.full-house { border-color: var(--win); box-shadow: 0 0 0 2px var(--win); }
+
+.row-status {
+  display: flex;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.row-status span { flex: 1; text-align: center; }
+.row-status .line { color: var(--win); font-weight: 700; }
+
+.ticket.empty {
+  align-items: center;
+  justify-content: center;
+  min-height: 10rem;
+  border-style: dashed;
+  color: var(--muted);
+}
+
+.hint { text-align: center; color: var(--muted); font-size: 0.8rem; }
+
+/* --- editor dialog --- */
+
+dialog {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--ink);
+  max-width: 26rem;
+  width: calc(100vw - 2rem);
+}
+
+dialog::backdrop { background: rgb(0 0 0 / 0.5); }
+
+#editor-form { display: flex; flex-direction: column; gap: 0.7rem; }
+
+#editor-form h2 { margin: 0; font-size: 1.1rem; }
+
+.editor-help { margin: 0; font-size: 0.85rem; color: var(--muted); }
+
+#editor-form label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+#editor-form input {
+  flex: 1;
+  font: inherit;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.editor-error { margin: 0; color: var(--danger); font-size: 0.85rem; min-height: 1em; }
+
+.editor-actions { display: flex; justify-content: flex-end; gap: 0.5rem; }
