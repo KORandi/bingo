@@ -273,7 +273,7 @@ document.getElementById("editor-form").addEventListener("submit", (e) => {
     document
       .getElementById(`editor-row-${r}`)
       .value.trim()
-      .split(/[\s,;]+/)
+      .split(/[\s,;.]+/)
       .filter(Boolean)
       .map(Number)
   );
